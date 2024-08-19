@@ -96,12 +96,20 @@ jobs:
         with:
           args: push 706com/backend:1.1
 
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+          ssh-passphrase: ${{ secrets.SSH_PASSPHRASE }}
+
+
       - name: restart backend container
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 192.168.0.112
           username: test
           key: ${{ secrets.SSH_KEY }}
+          password: ${{ secrets.SSH_PASSWORD }}
           port: 8102
           script: |
             kubectl apply -f - <<EOF
