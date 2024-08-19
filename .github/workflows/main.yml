@@ -48,8 +48,8 @@ jobs:
           host: 192.168.0.112
           username: test
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-#          password: ${{ secrets.SSH_PASSWORD }}
+#          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          password: ${{ secrets.SSH_PASSWORD }}
           port: 8102
           script: |
             kubectl apply -f - <<EOF
@@ -106,7 +106,7 @@ jobs:
           host: 192.168.0.112
           username: test
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+#          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 8102
           script: |
