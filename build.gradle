@@ -30,41 +30,41 @@ tasks.named('test') {
 
 def platform = project.hasProperty('platform') ? project.property('platform') : "frontend"
 
-docker{
-    if(platform == "frontend"){
-        name "706com/frontend" + version
+docker {
+    if (platform == "frontend") {
+        name "706com/frontend:"+version
         files "frontend/dist"
-        buildArgs(['DIST_DIR':"/"])
+        buildArgs(['DIST_DIR': "/"])
         dockerfile file('Dockerfile.frontend')
     } else {
-        name "706com/backend:" + version
+        name "706com/backend:"+version
         files tasks.bootJar.outputs.files
-        buildArgs(['JAR_FILE': tasks.bootJar.outputs.files.singleFile.name]) // 도커파일 매개변수 전달
-        dockerfile file('Dockerfile')   // 파일이 있는 경로 입력
+        buildArgs(['JAR_FILE': tasks.bootJar.outputs.files.singleFile.name])
+        dockerfile file('Dockerfile')
     }
 }
 
-task buildDocker(type: Exec){
+task buildDocker(type: Exec) {
     workingDir project.rootDir
-    commandLine './gradlew.bat', 'docker','-Pplatform=backend'
+    commandLine 'gradlew.bat', 'docker','-Pplatform=backend'
 }
 
-task dockerComposeUp(type: Exec, dependsOn: buildDocker){
+task dockerComposeUp(type: Exec, dependsOn: buildDocker) {
     environment 'DOCKER_IMAGE_TAG', version
     commandLine 'docker-compose', 'up', '--build', '-d'
 }
 
-task buildFrontend(type: Exec){
+task buildFrontend(type: Exec) {
     workingDir 'frontend'
     commandLine 'C:\\Program Files\\nodejs\\npm.cmd', 'run', 'build'
 }
 
-task buildDockerFrontend(type: Exec, dependsOn: buildFrontend){
+task buildDockerFrontend(type: Exec, dependsOn: buildFrontend) {
     workingDir project.rootDir
-    commandLine 'cmd', '/c', 'gradlew.bat','docker'
+    commandLine 'cmd', '/c', 'gradlew.bat', 'docker'
 }
 
-task dockerComposeUpFrontend(type: Exec, dependsOn: buildDockerFrontend){
+task dockerComposeUpFrontend(type: Exec, dependsOn: buildDockerFrontend) {
     environment 'DOCKER_IMAGE_TAG', version
     commandLine 'docker-compose', 'up', '--build', '-d'
 }
