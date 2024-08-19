@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.example'
-version = '1.0'
+version = '1.1'
 
 java {
     toolchain {
@@ -40,7 +40,7 @@ docker{
         name "706com/backend:" + version
         files tasks.bootJar.outputs.files
         buildArgs(['JAR_FILE': tasks.bootJar.outputs.files.singleFile.name]) // 도커파일 매개변수 전달
-        dockerfile file('Dockerfile')   // 파일이 입는 경로 입력
+        dockerfile file('Dockerfile')   // 파일이 있는 경로 입력
     }
 }
 
