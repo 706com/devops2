@@ -48,7 +48,7 @@ jobs:
           host: 192.168.0.112
           username: test
           key: ${{ secrets.SSH_KEY }}
-          port: 22
+          port: 8102
           script: |
             kubectl apply -f - <<EOF
             apiVersion: v1
@@ -102,7 +102,7 @@ jobs:
           host: 192.168.0.112
           username: test
           key: ${{ secrets.SSH_KEY }}
-          port: 22
+          port: 8102
           script: |
             kubectl apply -f - <<EOF
             apiVersion: v1
