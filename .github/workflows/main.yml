@@ -47,7 +47,7 @@ jobs:
         with:
           host: 192.168.0.112
           username: test
-          key: ${{ secrets.SSH_KEY }}
+#          key: ${{ secrets.SSH_KEY }}
 #          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 8102
@@ -105,7 +105,7 @@ jobs:
         with:
           host: 192.168.0.112
           username: test
-          key: ${{ secrets.SSH_KEY }}
+#          key: ${{ secrets.SSH_KEY }}
 #          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 8102
