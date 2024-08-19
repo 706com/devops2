@@ -49,7 +49,7 @@ jobs:
           username: test
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          password: ${{ secrets.SSH_PASSWORD }}
+#          password: ${{ secrets.SSH_PASSWORD }}
           port: 8102
           script: |
             kubectl apply -f - <<EOF
@@ -62,6 +62,7 @@ jobs:
                 - name: frontend
                   image: 706com/frontend:1.1
             EOF
+
   backend-deploy:
     if: github.ref == 'refs/heads/backend'
     name: Deploy to K8S backend
